@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Start View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="StartViewController" customModule="AR_Invaders" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="LS2-PB-7DP">
+                                <rect key="frame" x="20" y="68" width="374" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="K3a-ze-DF9"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="med_invader" translatesAutoresizingMaskIntoConstraints="NO" id="32Z-RH-fFc">
+                                <rect key="frame" x="20" y="269" width="376" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="NLh-PV-egb"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRm-5E-7Uu">
+                                <rect key="frame" x="1" y="409" width="414" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" playsSound="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="gHF-Lh-jee"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="40"/>
+                                <state key="normal" title="START">
+                                    <color key="titleColor" red="0.0" green="1" blue="0.067953254668845275" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="showARSimulation" destination="BYZ-38-t0r" eventType="touchUpInside" id="o2j-My-dfX"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adwitiya Chakraborty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU0-1X-b5O">
+                                <rect key="frame" x="122" y="544" width="172" height="23"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <viewLayoutGuide key="safeArea" id="d7y-z5-oUc"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.067953254670000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stefano Gatto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caj-zy-skH">
+                                <rect key="frame" x="153" y="570" width="109" height="23"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <viewLayoutGuide key="safeArea" id="Ihj-P6-Cdd"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.067953254670000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Augmented Reality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXh-F5-dSM">
+                                <rect key="frame" x="135" y="640" width="159" height="23"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <viewLayoutGuide key="safeArea" id="ocK-D9-dsF"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.067953254670000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CS7GV4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkg-eS-KLL">
+                                <rect key="frame" x="169" y="620" width="78" height="23"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <viewLayoutGuide key="safeArea" id="PzR-yP-61J"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.067953254670000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trinity College Dublin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhD-Ed-mha">
+                                <rect key="frame" x="85" y="671" width="244" height="33"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <viewLayoutGuide key="safeArea" id="l3D-Iq-bIG"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="1" blue="0.067953254670000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="caj-zy-skH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="153" id="6H4-cc-0ZZ"/>
+                            <constraint firstItem="32Z-RH-fFc" firstAttribute="centerX" secondItem="LS2-PB-7DP" secondAttribute="centerX" constant="1" id="Cdm-YM-lbd"/>
+                            <constraint firstItem="rkg-eS-KLL" firstAttribute="top" secondItem="caj-zy-skH" secondAttribute="bottom" constant="27" id="FFn-kZ-XkU"/>
+                            <constraint firstAttribute="bottom" secondItem="rkg-eS-KLL" secondAttribute="bottom" constant="93" id="Ly7-zl-S1L"/>
+                            <constraint firstItem="kXh-F5-dSM" firstAttribute="top" secondItem="rkg-eS-KLL" secondAttribute="bottom" constant="-3" id="OGL-Vw-vBo"/>
+                            <constraint firstItem="32Z-RH-fFc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1" id="QUE-hn-h4P"/>
+                            <constraint firstItem="dRm-5E-7Uu" firstAttribute="centerX" secondItem="dU0-1X-b5O" secondAttribute="centerX" id="SzO-bI-nu6"/>
+                            <constraint firstItem="caj-zy-skH" firstAttribute="top" secondItem="dU0-1X-b5O" secondAttribute="bottom" constant="3" id="Ujw-ox-ZWV"/>
+                            <constraint firstItem="caj-zy-skH" firstAttribute="leading" secondItem="kXh-F5-dSM" secondAttribute="leading" constant="18" id="WfK-p4-zQl"/>
+                            <constraint firstItem="caj-zy-skH" firstAttribute="leading" secondItem="rkg-eS-KLL" secondAttribute="leading" constant="-16" id="XNu-kw-xzg"/>
+                            <constraint firstItem="LS2-PB-7DP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="aCd-28-Nwl"/>
+                            <constraint firstItem="32Z-RH-fFc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-52.5" id="bcD-El-Zap"/>
+                            <constraint firstItem="dU0-1X-b5O" firstAttribute="trailing" secondItem="kXh-F5-dSM" secondAttribute="trailing" id="hk9-lY-iI3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="32Z-RH-fFc" secondAttribute="trailing" constant="18" id="ien-5P-PAt"/>
+                            <constraint firstItem="XhD-Ed-mha" firstAttribute="centerX" secondItem="rkg-eS-KLL" secondAttribute="centerX" constant="-1" id="ktn-4P-9RJ"/>
+                            <constraint firstItem="LS2-PB-7DP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nHa-Om-ZZJ"/>
+                            <constraint firstItem="dRm-5E-7Uu" firstAttribute="centerX" secondItem="caj-zy-skH" secondAttribute="centerX" id="nrt-2d-mDf"/>
+                            <constraint firstItem="XhD-Ed-mha" firstAttribute="top" secondItem="kXh-F5-dSM" secondAttribute="bottom" constant="8" id="o7t-JH-Gck"/>
+                            <constraint firstItem="dRm-5E-7Uu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="1" id="owq-dz-9fE"/>
+                            <constraint firstItem="rkg-eS-KLL" firstAttribute="centerX" secondItem="caj-zy-skH" secondAttribute="centerX" id="rkN-p8-ITf"/>
+                            <constraint firstItem="dRm-5E-7Uu" firstAttribute="top" secondItem="32Z-RH-fFc" secondAttribute="bottom" constant="47" id="sgP-B4-MOo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iXD-U2-tl8"/>
+                    <connections>
+                        <outlet property="startButton" destination="dRm-5E-7Uu" id="TLi-6k-3O4"/>
+                        <segue destination="AUM-9s-nJD" kind="show" identifier="showARSimulation" id="SiU-yA-Ro8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="759.4202898550725" y="491.57608695652175"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="PFq-pS-XbZ">
+            <objects>
+                <viewController id="AUM-9s-nJD" customClass="GameViewController" customModule="AR_Invaders" customModuleProvider="target" sceneMemberID="viewController">
+                    <arscnView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="xCe-4T-9Le">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </arscnView>
+                    <connections>
+                        <outlet property="sceneView" destination="xCe-4T-9Le" id="k4n-Sd-Ttw"/>
+                        <segue destination="ki5-kP-tH9" kind="unwind" identifier="unwind" unwindAction="unwindFromSimulationWithSegue:" id="6V9-D5-dQ0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5BW-Rd-aI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ki5-kP-tH9" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1652" y="492"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="900" height="389"/>
+        <image name="med_invader" width="496" height="371"/>
+    </resources>
+</document>
