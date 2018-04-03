@@ -4,7 +4,7 @@
 //  Trinity College Dublin
 //  CS7GV4 - Augmented Reality Game
 
-import ReplayKit
+/*import ReplayKit
 
 class ScreenCaptureUtility : NSObject {
     
@@ -89,3 +89,4 @@ extension ScreenCaptureUtility : RPPreviewViewControllerDelegate{
         topViewController?.dismiss(animated: true, completion: nil)
     }
 }
+ */

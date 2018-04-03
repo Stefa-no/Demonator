@@ -9,6 +9,7 @@ import UIKit
 import ARKit
 import SpriteKit
 import ReplayKit
+import AVFoundation
 
 struct PhysicsMask {
     static let playerBullet = 0
@@ -28,6 +29,8 @@ class GameViewController: UIViewController, GameDelegate{
     var aliens = [AlienNode]()
     var lasers = [LaserNode]()
     var game = Game()
+    var flarePlayer = AVAudioPlayer()
+    var magicPlayer = AVAudioPlayer()
     
     // Next 3 variables define how the score and such should be displayed on the screen
     
@@ -40,6 +43,8 @@ class GameViewController: UIViewController, GameDelegate{
     lazy var stringAttributes : [NSAttributedStringKey : Any] = [.strokeColor : UIColor.black, .strokeWidth : -4, .foregroundColor: UIColor.white, .font : UIFont.systemFont(ofSize: 20, weight: .bold), .paragraphStyle : paragraphStyle]
     
     lazy var titleAttributes : [NSAttributedStringKey : Any] = [.strokeColor : UIColor.black, .strokeWidth : -4, .foregroundColor: UIColor.white, .font : UIFont.systemFont(ofSize: 50, weight: .bold), .paragraphStyle : paragraphStyle]
+    
+     lazy var levelAttributers : [NSAttributedStringKey : Any] = [.strokeColor : UIColor.black, .strokeWidth : -4, .foregroundColor: UIColor.white, .font : UIFont.systemFont(ofSize: 40, weight: .bold), .paragraphStyle : paragraphStyle]
     
     // Nodes for the scene itself
     var scoreNode : SKLabelNode!
@@ -93,6 +98,16 @@ class GameViewController: UIViewController, GameDelegate{
         setupScene()
         setupGestureRecognizers()
         game.delegate = self
+        do{
+            flarePlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "fireball", ofType: "mp3")!))
+            flarePlayer.prepareToPlay()
+            magicPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "magic", ofType: "mp3")!))
+            magicPlayer.prepareToPlay()
+            
+        }
+        catch{
+            print(error)
+        }
         
     }
     
@@ -187,7 +202,7 @@ class GameViewController: UIViewController, GameDelegate{
         guard let hasWon = game.winLoseFlag else { return }
         winNode.alpha = 1
         if game.current_level == 2 {
-            winNode.attributedText = NSAttributedString(string: hasWon ? "Level 1 completed!" : "You Lose!", attributes: titleAttributes)
+            winNode.attributedText = NSAttributedString(string: hasWon ? "Level 1 completed!" : "You Lose!", attributes: levelAttributers)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 self.winNode.alpha = 0
@@ -197,7 +212,7 @@ class GameViewController: UIViewController, GameDelegate{
             
         }
         else if game.current_level == 3 {
-            winNode.attributedText = NSAttributedString(string: hasWon ? "Level 2 completed!" : "You Lose!", attributes: titleAttributes)
+            winNode.attributedText = NSAttributedString(string: hasWon ? "Level 2 completed!" : "You Lose!", attributes: levelAttributers)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 self.winNode.alpha = 0
@@ -227,7 +242,7 @@ class GameViewController: UIViewController, GameDelegate{
     }
     
     @objc func handleThreeFingerTap(sender: UITapGestureRecognizer){
-        ScreenCaptureUtility.shared.toggleRecording()
+       
     }
     
     //MARK: Game Actions
@@ -245,16 +260,24 @@ class GameViewController: UIViewController, GameDelegate{
             position = SCNVector3Make(0, 0, 0.05)
             convertedPosition = node.convertPosition(position, to: nil)
             direction = pov.position - node.position
+            if flarePlayer.isPlaying{
+                flarePlayer.currentTime = 0
+            }
+            flarePlayer.play()
         default:
             // If player, shoot straight ahead
             position = SCNVector3Make(0, 0, -0.05)
             convertedPosition = node.convertPosition(position, to: nil)
             direction = convertedPosition - pov.position
+            if magicPlayer.isPlaying{
+                magicPlayer.currentTime = 0
+            }
+            magicPlayer.play()
         }
-        
         let laser = LaserNode(initialPosition: convertedPosition, direction: direction, type: type)
         lasers.append(laser)
         sceneView.scene.rootNode.addChildNode(laser.node)
+        
     }
     
     private func spawnAlien(alien: Alien){
@@ -329,6 +352,20 @@ extension GameViewController : ARSCNViewDelegate{
                 alien.node.removeFromParentNode()
                 aliens.remove(at: i)
                 game.health -= alien.alien.health
+                if(arc4random_uniform(game.spawnProb) == 0){
+                    game.spawnedAliens = game.spawnedAliens + 1
+                    var newAlien : Alien
+                    if game.current_level == 1 {
+                        newAlien = Alien(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
+                    }
+                    else if game.current_level == 2 {
+                         newAlien =  Alien(health: 3, power: 3, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .medium)
+                    }
+                    else {
+                         newAlien =  Alien(health: 5, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .large)
+                    }
+                    spawnAlien(alien: newAlien)
+                }
             }else {
             
                 if alien.alien.shouldShoot() {
@@ -372,7 +409,7 @@ extension GameViewController : ARSCNViewDelegate{
                     && laser.node.position.distance(vector: sceneView.pointOfView!.position) < 0.03{
                     laser.node.removeFromParentNode()
                     lasers.remove(at: i)
-                    game.health -= 1
+                    game.health -= aliens[0].alien.power
                 }
             }
         }
@@ -392,7 +429,7 @@ extension GameViewController : ARSCNViewDelegate{
             case .insufficientFeatures:
                 print("Camera Tracking State Limited Due to Insufficient Features")
             case .relocalizing:
-                print("Camera Relocalizing")
+                print("Camera Tracking State Limited Due to Insufficient Features")
             }
         case .normal:
             print("Camera Tracking State Normal")

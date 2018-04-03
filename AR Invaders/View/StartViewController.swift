@@ -6,19 +6,30 @@
 //  CS7GV4 - Augmented Reality Game
 
 import UIKit
+import AVFoundation
 
 class StartViewController: UIViewController {
-
+     var themePlayer = AVAudioPlayer()
     @IBOutlet var startButton : UIButton!
     var shouldPulse = false
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        do{
+            themePlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "Contamination", ofType: "mp3")!))
+            themePlayer.prepareToPlay()
+        }
+        catch{
+            print(error)
+        }
+        themePlayer.play()
         shouldPulse = true
-        //pulse()
     }
     
     @IBAction func showARSimulation(){
+        
+        themePlayer.stop()
+        themePlayer.currentTime = 0
         print("Button Pressed")
         performSegue(withIdentifier: "showARSimulation", sender: nil)
     }
@@ -38,7 +49,5 @@ class StartViewController: UIViewController {
     @IBAction func unwindFromSimulation(segue: UIStoryboardSegue){
         //Do Nothing
     }
-
-
 }
 
