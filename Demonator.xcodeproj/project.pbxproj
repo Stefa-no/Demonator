@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0671EF207DD24F00F14F2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B0671EE207DD24E00F14F2D /* Assets.xcassets */; };
+		1B0671F1207DD27600F14F2D /* fire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 1B0671F0207DD27600F14F2D /* fire.scnp */; };
 		5316EFB62071B4ED0064D364 /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 5316EFB42071B4ED0064D364 /* bokeh.png */; };
 		5316EFB72071B4ED0064D364 /* bokeh.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 5316EFB52071B4ED0064D364 /* bokeh.scnp */; };
 		534B12DE20742FA800142F4D /* fireball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 534B12DD20742FA800142F4D /* fireball.mp3 */; };
 		534B12E0207432D900142F4D /* magic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 534B12DF207432D900142F4D /* magic.mp3 */; };
 		534B12E22074384500142F4D /* Contamination.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 534B12E12074384500142F4D /* Contamination.mp3 */; };
-		5358AADF2071A2ED0021708E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5358AADD2071A2EC0021708E /* Assets.xcassets */; };
-		5358AAE22071AAC40021708E /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5358AAE02071AAC40021708E /* spark.png */; };
-		5358AAE32071AAC40021708E /* fire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 5358AAE12071AAC40021708E /* fire.scnp */; };
 		53DC9B71207125F0000A3A5E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 53DC9B70207125F0000A3A5E /* art.scnassets */; };
 		A35F34781F5CD48500957F2A /* Demon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35F34771F5CD48500957F2A /* Demon.swift */; };
 		A37F0E2A1F341AA4003ED6AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37F0E291F341AA4003ED6AE /* AppDelegate.swift */; };
@@ -32,14 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B0671EE207DD24E00F14F2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Demonator/Particles/Assets.xcassets; sourceTree = "<group>"; };
+		1B0671F0207DD27600F14F2D /* fire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; name = fire.scnp; path = Demonator/Particles/fire.scnp; sourceTree = "<group>"; };
 		5316EFB42071B4ED0064D364 /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		5316EFB52071B4ED0064D364 /* bokeh.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = bokeh.scnp; sourceTree = "<group>"; };
 		534B12DD20742FA800142F4D /* fireball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireball.mp3; sourceTree = "<group>"; };
 		534B12DF207432D900142F4D /* magic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = magic.mp3; sourceTree = "<group>"; };
 		534B12E12074384500142F4D /* Contamination.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Contamination.mp3; sourceTree = "<group>"; };
-		5358AADD2071A2EC0021708E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "AR Invaders/Particles/Assets.xcassets"; sourceTree = "<group>"; };
-		5358AAE02071AAC40021708E /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = "AR Invaders/Particles/spark.png"; sourceTree = "<group>"; };
-		5358AAE12071AAC40021708E /* fire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; name = fire.scnp; path = "AR Invaders/Particles/fire.scnp"; sourceTree = "<group>"; };
 		53DC9B70207125F0000A3A5E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		A35F34771F5CD48500957F2A /* Demon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demon.swift; sourceTree = "<group>"; };
 		A37F0E261F341AA4003ED6AE /* Demonator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demonator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,13 +116,12 @@
 		A37F0E1D1F341AA4003ED6AE = {
 			isa = PBXGroup;
 			children = (
+				1B0671F0207DD27600F14F2D /* fire.scnp */,
+				1B0671EE207DD24E00F14F2D /* Assets.xcassets */,
 				534B12DC20742F3C00142F4D /* Audio */,
 				5316EFB42071B4ED0064D364 /* bokeh.png */,
 				5316EFB52071B4ED0064D364 /* bokeh.scnp */,
-				5358AAE02071AAC40021708E /* spark.png */,
-				5358AAE12071AAC40021708E /* fire.scnp */,
-				5358AADD2071A2EC0021708E /* Assets.xcassets */,
-				A37F0E281F341AA4003ED6AE /* AR Invaders */,
+				A37F0E281F341AA4003ED6AE /* Demonator */,
 				A37F0E271F341AA4003ED6AE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -137,14 +134,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A37F0E281F341AA4003ED6AE /* AR Invaders */ = {
+		A37F0E281F341AA4003ED6AE /* Demonator */ = {
 			isa = PBXGroup;
 			children = (
 				A35F34761F5CD39900957F2A /* Supporting Files */,
 				A35F34741F5CD35C00957F2A /* View */,
 				A35F34731F5CD35500957F2A /* Model */,
 			);
-			path = "AR Invaders";
+			path = Demonator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,13 +206,12 @@
 				534B12E0207432D900142F4D /* magic.mp3 in Resources */,
 				53DC9B71207125F0000A3A5E /* art.scnassets in Resources */,
 				5316EFB62071B4ED0064D364 /* bokeh.png in Resources */,
-				5358AADF2071A2ED0021708E /* Assets.xcassets in Resources */,
 				5316EFB72071B4ED0064D364 /* bokeh.scnp in Resources */,
-				5358AAE22071AAC40021708E /* spark.png in Resources */,
 				534B12E22074384500142F4D /* Contamination.mp3 in Resources */,
 				A37F0E311F341AA4003ED6AE /* Assets.xcassets in Resources */,
+				1B0671F1207DD27600F14F2D /* fire.scnp in Resources */,
 				534B12DE20742FA800142F4D /* fireball.mp3 in Resources */,
-				5358AAE32071AAC40021708E /* fire.scnp in Resources */,
+				1B0671EF207DD24F00F14F2D /* Assets.xcassets in Resources */,
 				A37F0E2F1F341AA4003ED6AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,7 +375,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 498679YAYR;
-				INFOPLIST_FILE = "AR Invaders/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Demonator/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adwitiya.Demonator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -394,7 +390,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 498679YAYR;
-				INFOPLIST_FILE = "AR Invaders/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Demonator/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.adwitiya.Demonator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
