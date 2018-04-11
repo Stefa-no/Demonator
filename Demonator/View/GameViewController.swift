@@ -133,7 +133,6 @@ class GameViewController: UIViewController, GameDelegate{
     
     private func setupScene(){
         sceneView.delegate = self
-        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         sceneView.scene = SCNScene()
         sceneView.scene.physicsWorld.contactDelegate = self
         sceneView.overlaySKScene = SKScene(size: sceneView.bounds.size)
@@ -145,11 +144,6 @@ class GameViewController: UIViewController, GameDelegate{
     
     private func configureScene(){
         let config = ARWorldTrackingConfiguration()
-        if #available(iOS 11.3, *) {
-            config.planeDetection = .vertical
-        } else {
-            // Fallback on earlier versions
-        }
         sceneView.session.run(config)
     }
     
