@@ -84,17 +84,15 @@ class DemonNode : SCNNodeContainer{
         mainNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
         mainNode.physicsBody?.contactTestBitMask = PhysicsMask.enemy
         mainNode.physicsBody?.isAffectedByGravity = false
-        mainNode.addChildNode(backNode)
-        return mainNode
-    }
-    
-    private func createShipNode() -> SCNNode{
-        var node = SCNNode()
-        let scene = SCNScene(named:"/monster/golem.scn")!
-        let nodename = "golem"
-        node = scene.rootNode.childNode(withName: nodename, recursively: true )!
+        //mainNode.addChildNode(backNode)
         
-        return node
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let myString = formatter.string(from: Date())
+        mainNode.name = myString
+        
+        return mainNode
     }
     
     
