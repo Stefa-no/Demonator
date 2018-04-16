@@ -32,7 +32,7 @@ class Game {
     
     var spawnCount = 0 // Counter to trigger the spawn
     let spawnFreq = 60 // How often it will try to spawn an alien
-    let spawnProb : UInt32 = 2 // Gives a 1 in (n + 1) chance it will spawn an alien when it tries.
+    let spawnProb : UInt32 = 3 // Gives a 1 in (n + 1) chance it will spawn an alien when it tries.
     
     var maxAliens = 5 // Max number of aliens that can be spawned.
     var spawnedAliens = 0
@@ -63,10 +63,10 @@ class Game {
                     return Alien(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
                 }
                 if current_level == 2 {
-                    return Alien(health: 3, power: 3, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .medium)
+                    return Alien(health: 3, power: 3, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .medium)
                 }
                 if current_level == 3 {
-                    return Alien(health: 5, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .large)
+                    return Alien(health: 5, power: 5, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .large)
                 }
             }
         }

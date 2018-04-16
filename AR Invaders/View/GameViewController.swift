@@ -322,7 +322,9 @@ extension GameViewController : SCNPhysicsContactDelegate {
     }
     
     func hitEnemy(bullet: SCNNode, enemy: SCNNode){
+        bullet.physicsBody = nil
         bullet.removeFromParentNode()
+        enemy.physicsBody = nil
         enemy.removeFromParentNode()
         game.score += 1
     }
@@ -349,21 +351,23 @@ extension GameViewController : ARSCNViewDelegate{
             // Move alien closer to where they need to go
             if alien.move(towardsPosition: sceneView.pointOfView!.position) == false {
                 // If move function returned false, assume a crash and remove alien from world.
+                for particle in alien.node.childNodes{
+                    particle.removeFromParentNode()
+                }
+                alien.node.physicsBody = nil
                 alien.node.removeFromParentNode()
                 aliens.remove(at: i)
                 game.health -= alien.alien.health
-                if(arc4random_uniform(game.spawnProb) == 0){
-                    game.spawnedAliens = game.spawnedAliens + 1
-                    var newAlien : Alien
-                    if game.current_level == 1 {
-                        newAlien = Alien(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
-                    }
-                    else if game.current_level == 2 {
-                         newAlien =  Alien(health: 3, power: 3, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .medium)
-                    }
-                    else {
-                         newAlien =  Alien(health: 5, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .large)
-                    }
+                if game.current_level == 1 {
+                    let newAlien = Alien(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
+                    spawnAlien(alien: newAlien)
+                }
+                else if game.current_level == 2 {
+                     let newAlien = Alien(health: 3, power: 3, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .medium)
+                    spawnAlien(alien: newAlien)
+                }
+                else {
+                     let newAlien = Alien(health: 5, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .large)
                     spawnAlien(alien: newAlien)
                 }
             }else {
@@ -398,18 +402,38 @@ extension GameViewController : ARSCNViewDelegate{
             if laser.node.parent == nil {
                 // If laser is no longer in the world, remove it from our list
                 lasers.remove(at: i)
+                continue
             }
             // Move the lasers and remove if necessary
             if laser.move() == false {
+                for particle in laser.node.childNodes{
+                    particle.removeFromParentNode()
+                }
+                laser.node.physicsBody = nil
                 laser.node.removeFromParentNode()
                 lasers.remove(at: i)
             }else{
                 // Check for a hit against the player
                 if laser.node.physicsBody?.contactTestBitMask == PhysicsMask.enemyBullet
-                    && laser.node.position.distance(vector: sceneView.pointOfView!.position) < 0.03{
+                    && laser.node.position.distance(vector: sceneView.pointOfView!.position) < 0.1 {
+                    for particle in laser.node.childNodes{
+                        particle.removeFromParentNode()
+                    }
+                    laser.node.physicsBody = nil
+                    if (laser.node == nil ) {print ("laser node")}
+                    if (laser == nil ) {print (" laser")}
+                    if (laser.node.parent == nil ) {print ("parent node")}
                     laser.node.removeFromParentNode()
                     lasers.remove(at: i)
-                    game.health -= aliens[0].alien.power
+                    if game.current_level == 1{
+                        game.health -= 1
+                    }
+                    if game.current_level == 2{
+                        game.health -= 3
+                    }
+                    if game.current_level == 3{
+                        game.health -= 5
+                    }
                 }
             }
         }

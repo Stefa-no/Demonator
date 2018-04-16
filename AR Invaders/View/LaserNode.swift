@@ -39,15 +39,37 @@ class LaserNode: SCNNodeContainer{
         if type == .enemy{
             let particleNode = SCNNode()
             let particleSystem = SCNParticleSystem(named: "fire", inDirectory: "")
+            particleSystem?.particleDiesOnCollision = true
             particleNode.addParticleSystem(particleSystem!)
+           
+            let formatter = DateFormatter()
+            // initially set the format based on your datepicker date
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let myString = formatter.string(from: Date())
+            
+            particleNode.name = myString
             sphereNode.addChildNode(particleNode)
             
         }else{
             let particleNode = SCNNode()
             let particleSystem = SCNParticleSystem(named: "bokeh", inDirectory: "")
+            particleSystem?.particleDiesOnCollision = true
+            
+            let formatter = DateFormatter()
+            // initially set the format based on your datepicker date
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let myString = formatter.string(from: Date())
+            particleNode.name = myString
+            
             particleNode.addParticleSystem(particleSystem!)
             sphereNode.addChildNode(particleNode)
         }
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let myString = formatter.string(from: Date())
+        sphereNode.name = myString
+        
         sphereNode.physicsBody?.isAffectedByGravity = false
        
         return sphereNode
