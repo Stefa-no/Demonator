@@ -16,7 +16,7 @@
 		5358AAE22071AAC40021708E /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5358AAE02071AAC40021708E /* spark.png */; };
 		5358AAE32071AAC40021708E /* fire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 5358AAE12071AAC40021708E /* fire.scnp */; };
 		53DC9B71207125F0000A3A5E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 53DC9B70207125F0000A3A5E /* art.scnassets */; };
-		A35F34781F5CD48500957F2A /* Alien.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35F34771F5CD48500957F2A /* Alien.swift */; };
+		A35F34781F5CD48500957F2A /* Demon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35F34771F5CD48500957F2A /* Demon.swift */; };
 		A37F0E2A1F341AA4003ED6AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37F0E291F341AA4003ED6AE /* AppDelegate.swift */; };
 		A37F0E2C1F341AA4003ED6AE /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37F0E2B1F341AA4003ED6AE /* StartViewController.swift */; };
 		A37F0E2F1F341AA4003ED6AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A37F0E2D1F341AA4003ED6AE /* Main.storyboard */; };
@@ -26,7 +26,7 @@
 		A38BF9311F3929D500B4E58E /* LaserNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38BF9301F3929D500B4E58E /* LaserNode.swift */; };
 		A38BF9331F3E48C800B4E58E /* SCNNodeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38BF9321F3E48C800B4E58E /* SCNNodeContainer.swift */; };
 		A38BF9351F3E65DA00B4E58E /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38BF9341F3E65DA00B4E58E /* UIImage+Extension.swift */; };
-		A39611781F37B843003026E6 /* AlienNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39611771F37B843003026E6 /* AlienNode.swift */; };
+		A39611781F37B843003026E6 /* DemonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39611771F37B843003026E6 /* DemonNode.swift */; };
 		A396117A1F37BB57003026E6 /* SCNVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39611791F37BB57003026E6 /* SCNVector+Extension.swift */; };
 		A39FDCA31F40A1C9002060C1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39FDCA21F40A1C9002060C1 /* Game.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +41,7 @@
 		5358AAE02071AAC40021708E /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = "AR Invaders/Particles/spark.png"; sourceTree = "<group>"; };
 		5358AAE12071AAC40021708E /* fire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; name = fire.scnp; path = "AR Invaders/Particles/fire.scnp"; sourceTree = "<group>"; };
 		53DC9B70207125F0000A3A5E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		A35F34771F5CD48500957F2A /* Alien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alien.swift; sourceTree = "<group>"; };
+		A35F34771F5CD48500957F2A /* Demon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demon.swift; sourceTree = "<group>"; };
 		A37F0E261F341AA4003ED6AE /* Demonator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demonator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A37F0E291F341AA4003ED6AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A37F0E2B1F341AA4003ED6AE /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		A38BF9301F3929D500B4E58E /* LaserNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserNode.swift; sourceTree = "<group>"; };
 		A38BF9321F3E48C800B4E58E /* SCNNodeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNodeContainer.swift; sourceTree = "<group>"; };
 		A38BF9341F3E65DA00B4E58E /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		A39611771F37B843003026E6 /* AlienNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlienNode.swift; sourceTree = "<group>"; };
+		A39611771F37B843003026E6 /* DemonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemonNode.swift; sourceTree = "<group>"; };
 		A39611791F37BB57003026E6 /* SCNVector+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNVector+Extension.swift"; sourceTree = "<group>"; };
 		A39FDCA21F40A1C9002060C1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				A39FDCA21F40A1C9002060C1 /* Game.swift */,
-				A35F34771F5CD48500957F2A /* Alien.swift */,
+				A35F34771F5CD48500957F2A /* Demon.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -93,7 +93,7 @@
 			children = (
 				A38BF9321F3E48C800B4E58E /* SCNNodeContainer.swift */,
 				A38BF9301F3929D500B4E58E /* LaserNode.swift */,
-				A39611771F37B843003026E6 /* AlienNode.swift */,
+				A39611771F37B843003026E6 /* DemonNode.swift */,
 				A37F0E2D1F341AA4003ED6AE /* Main.storyboard */,
 				A37F0E2B1F341AA4003ED6AE /* StartViewController.swift */,
 				A37F0E3B1F378237003ED6AE /* GameViewController.swift */,
@@ -229,12 +229,12 @@
 			files = (
 				A37F0E2C1F341AA4003ED6AE /* StartViewController.swift in Sources */,
 				A39FDCA31F40A1C9002060C1 /* Game.swift in Sources */,
-				A35F34781F5CD48500957F2A /* Alien.swift in Sources */,
+				A35F34781F5CD48500957F2A /* Demon.swift in Sources */,
 				A38BF9311F3929D500B4E58E /* LaserNode.swift in Sources */,
 				A37F0E3C1F378237003ED6AE /* GameViewController.swift in Sources */,
 				A38BF9351F3E65DA00B4E58E /* UIImage+Extension.swift in Sources */,
 				A37F0E2A1F341AA4003ED6AE /* AppDelegate.swift in Sources */,
-				A39611781F37B843003026E6 /* AlienNode.swift in Sources */,
+				A39611781F37B843003026E6 /* DemonNode.swift in Sources */,
 				A396117A1F37BB57003026E6 /* SCNVector+Extension.swift in Sources */,
 				A38BF9331F3E48C800B4E58E /* SCNNodeContainer.swift in Sources */,
 			);

@@ -13,7 +13,7 @@ class Game {
     
     let cooldown = 0.3 // Player shot cooldown in number of seconds
     let power = 5 // How much power a player bullet has
-    var health = 100  { // How much health the player has
+    var health = 1000  { // How much health the player has
         didSet{
             delegate?.healthDidChange()
         }
@@ -31,19 +31,20 @@ class Game {
     }
     
     var spawnCount = 0 // Counter to trigger the spawn
-    let spawnFreq = 60 // How often it will try to spawn an alien
-    let spawnProb : UInt32 = 3 // Gives a 1 in (n + 1) chance it will spawn an alien when it tries.
+    let spawnFreq = 60 // How often it will try to spawn an demon
+    let spawnProb : UInt32 = 3 // Gives a 1 in (n + 1) chance it will spawn an demon when it tries.
     
-    var maxAliens = 5 // Max number of aliens that can be spawned.
-    var spawnedAliens = 0
-    let alienPower = 3 // How much health an alien bullet takes away
-    let alienHealth = 5 // How much health an alien has
+    var maxDemons = 5 // Max number of demons that can be spawned.
+    var spawnedDemons = 0
+    let demonPower = 3 // How much health an demon bullet takes away
+    let demonHealth = 5 // How much health an demon has
         
     var winLoseFlag : Bool? // optional for whether player has win, lost, or neither
     
     var level1_Score = 5
     var level2_Score = 15
-    var levelf_Score = 30
+    var level3_Score = 30
+    var levelf_Score = 45
     var current_level = 1
 
     var score = 0 { // Stores the current score
@@ -52,30 +53,29 @@ class Game {
         }
     }
     
-    func spawnAlien() -> Alien?{ // Decides whether an alien should be spawned
-        guard spawnedAliens < maxAliens else { return nil }
+    func spawnDemon() -> Demon?{ // Decides whether an demon should be spawned
+        guard spawnedDemons < maxDemons else { return nil }
         spawnCount += 1
         if(spawnCount == spawnFreq){
             spawnCount = 0
             if(arc4random_uniform(spawnProb) == 0){
-                spawnedAliens = spawnedAliens + 1
+                spawnedDemons = spawnedDemons + 1
                 if current_level == 1 {
-                    return Alien(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
+                    return Demon(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
                 }
                 if current_level == 2 {
-                    return Alien(health: 3, power: 3, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .medium)
+                    return Demon(health: 3, power: 3, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .medium)
                 }
                 if current_level == 3 {
-                    return Alien(health: 5, power: 5, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .large)
+                    return Demon(health: 5, power: 5, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .large)
+                }
+                if current_level == 4 {
+                    return Demon(health: 15, power: 5, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .boss)
                 }
             }
         }
         return nil
     }
-    
-    
-    
-
 }
 
 protocol GameDelegate {

@@ -26,7 +26,8 @@ class GameViewController: UIViewController, GameDelegate{
 
     
     @IBOutlet var sceneView : ARSCNView!
-    var aliens = [AlienNode]()
+    var demons = [DemonNode]()
+    var bossLife = 15
     var lasers = [LaserNode]()
     var game = Game()
     var flarePlayer = AVAudioPlayer()
@@ -49,6 +50,7 @@ class GameViewController: UIViewController, GameDelegate{
     // Nodes for the scene itself
     var scoreNode : SKLabelNode!
     var livesNode : SKLabelNode!
+    var bossLifeNode: SKLabelNode!
     var winNode : SKLabelNode!
     var radarNode : SKShapeNode!
     
@@ -73,8 +75,13 @@ class GameViewController: UIViewController, GameDelegate{
             game.winLoseFlag = true
             showFinish()
         }
-        if game.score == game.levelf_Score && game.current_level == 3 {
+        if game.score == game.level3_Score && game.current_level == 3 {
             game.current_level = 4
+            game.winLoseFlag = true
+            showFinish()
+        }
+        if game.score == game.levelf_Score && game.current_level == 4 {
+            game.current_level = 5
             game.winLoseFlag = true
             showFinish()
         }
@@ -85,7 +92,7 @@ class GameViewController: UIViewController, GameDelegate{
         livesNode.attributedText = NSAttributedString(string: "Life: \(game.health)", attributes: stringAttributes)
         if game.health <= 0 {
             game.winLoseFlag = false
-            game.current_level = 4
+            game.current_level = 5
             showFinish()
         }
     }
@@ -126,6 +133,7 @@ class GameViewController: UIViewController, GameDelegate{
     
     private func setupScene(){
         sceneView.delegate = self
+        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         sceneView.scene = SCNScene()
         sceneView.scene.physicsWorld.contactDelegate = self
         sceneView.overlaySKScene = SKScene(size: sceneView.bounds.size)
@@ -137,6 +145,11 @@ class GameViewController: UIViewController, GameDelegate{
     
     private func configureScene(){
         let config = ARWorldTrackingConfiguration()
+        if #available(iOS 11.3, *) {
+            config.planeDetection = .vertical
+        } else {
+            // Fallback on earlier versions
+        }
         sceneView.session.run(config)
     }
     
@@ -170,7 +183,7 @@ class GameViewController: UIViewController, GameDelegate{
             sceneView.overlaySKScene?.addChild(ringNode)
         }
         
-        for _ in (0..<(game.maxAliens)){
+        for _ in (0..<(game.maxDemons)){
             let blip = SKShapeNode(circleOfRadius: 5)
             blip.fillColor = .red
             blip.strokeColor = .clear
@@ -185,17 +198,21 @@ class GameViewController: UIViewController, GameDelegate{
 
         scoreNode = SKLabelNode(attributedText: NSAttributedString(string: "Points: \(game.score)", attributes: stringAttributes))
         livesNode = SKLabelNode(attributedText: NSAttributedString(string: "Life: \(game.health)", attributes: stringAttributes))
+        bossLifeNode = SKLabelNode(attributedText: NSAttributedString(string: "Boss Life: \(bossLife)", attributes: stringAttributes))
+        bossLifeNode.alpha = 0
         winNode = SKLabelNode(text: "Default")
         winNode.alpha = 0
     
         
         scoreNode.position = CGPoint(x: (size.width - scoreNode.frame.width/2) - sidePadding, y: (size.height - scoreNode.frame.height) - topPadding)
         livesNode.position = CGPoint(x: sidePadding + livesNode.frame.width/2, y: (size.height - livesNode.frame.height) - topPadding )
+        bossLifeNode.position = CGPoint(x: size.width/2 , y: 4 * size.height / 5)
         winNode.position = CGPoint(x: size.width/2, y: size.height/2)
         
         sceneView.overlaySKScene?.addChild(scoreNode)
         sceneView.overlaySKScene?.addChild(livesNode)
         sceneView.overlaySKScene?.addChild(winNode)
+        sceneView.overlaySKScene?.addChild(bossLifeNode)
     }
     
     private func showFinish(){
@@ -207,7 +224,7 @@ class GameViewController: UIViewController, GameDelegate{
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 self.winNode.alpha = 0
                 self.game.winLoseFlag = nil
-                self.game.maxAliens = 15
+                self.game.maxDemons = 15
             })
             
         }
@@ -217,11 +234,22 @@ class GameViewController: UIViewController, GameDelegate{
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 self.winNode.alpha = 0
                 self.game.winLoseFlag = nil
-                self.game.maxAliens = 30
+                self.game.maxDemons = 30
             })
             
         }
         else if game.current_level == 4 {
+            winNode.attributedText = NSAttributedString(string: hasWon ? "Prepare for boss" : "You Lose!", attributes: levelAttributers)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+                self.bossLifeNode.alpha = 1
+                self.winNode.alpha = 0
+                self.game.winLoseFlag = nil
+                self.game.maxDemons = 31
+            })
+            
+        }
+        else if game.current_level == 5 {
             winNode.attributedText = NSAttributedString(string: hasWon ? "You Win!" : "You Lose!", attributes: titleAttributes)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
@@ -280,7 +308,7 @@ class GameViewController: UIViewController, GameDelegate{
         
     }
     
-    private func spawnAlien(alien: Alien){
+    private func spawnDemon(demon: Demon){
         let pov = sceneView.pointOfView!
         let y = (Float(arc4random_uniform(60)) - 29) * 0.01 // Random Y Value between -0.3 and 0.3
         
@@ -292,13 +320,13 @@ class GameViewController: UIViewController, GameDelegate{
         let z = length * cos(zRad)
         let position = SCNVector3Make(x, y, z)
         let worldPosition = pov.convertPosition(position, to: nil)
-        let alienNode = AlienNode(alien: alien, position: worldPosition, cameraPosition: pov.position)
-        let particleNode = SCNNode()
-        let particleSystem = SCNParticleSystem(named: "fire", inDirectory: "")
-        particleNode.addParticleSystem(particleSystem!)
-        alienNode.node.addChildNode(particleNode)
-        aliens.append(alienNode)
-        sceneView.scene.rootNode.addChildNode(alienNode.node)
+        let demonNode = DemonNode(demon: demon, position: worldPosition, cameraPosition: pov.position)
+        //let particleNode = SCNNode()
+        //let particleSystem = SCNParticleSystem(named: "fire", inDirectory: "")
+        //particleNode.addParticleSystem(particleSystem!)
+        //demonNode.node.addChildNode(particleNode)
+        demons.append(demonNode)
+        sceneView.scene.rootNode.addChildNode(demonNode.node)
     }
 
 }
@@ -323,10 +351,27 @@ extension GameViewController : SCNPhysicsContactDelegate {
     
     func hitEnemy(bullet: SCNNode, enemy: SCNNode){
         bullet.physicsBody = nil
-        bullet.removeFromParentNode()
-        enemy.physicsBody = nil
-        enemy.removeFromParentNode()
-        game.score += 1
+        DispatchQueue.main.async(execute: {
+            bullet.removeFromParentNode()
+        })
+        if game.current_level == 4 {
+            bossLife -= 5
+            game.score += 5
+            bossLifeNode.attributedText = NSMutableAttributedString(string: "Boss Life: \(bossLife)", attributes: stringAttributes)
+            if bossLife <= 0 {
+                enemy.physicsBody = nil
+                DispatchQueue.main.async(execute: {
+                    enemy.removeFromParentNode()
+                })
+            }
+        }
+        else{
+            enemy.physicsBody = nil
+            DispatchQueue.main.async(execute: {
+                enemy.removeFromParentNode()
+            })
+            game.score += 1
+        }
     }
 }
 
@@ -335,62 +380,70 @@ extension GameViewController : ARSCNViewDelegate{
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         guard game.winLoseFlag == nil else { return }
 
-        // Lets the game object give an alien to spawn
-        if let alien = game.spawnAlien(){
-            spawnAlien(alien: alien)
+        // Lets the game object give an demon to spawn
+        if let demon = game.spawnDemon(){
+            spawnDemon(demon: demon)
         }
         
-        for (i, alien) in aliens.enumerated().reversed() {
+        for (i, demon) in demons.enumerated().reversed() {
             
-            // If alien isn't in the world any more, then remove it from our alien list
-            guard alien.node.parent != nil else {
-                aliens.remove(at: i)
+            // If demon isn't in the world any more, then remove it from our demon list
+            guard demon.node.parent != nil else {
+                demons.remove(at: i)
                 continue
             }
             
-            // Move alien closer to where they need to go
-            if alien.move(towardsPosition: sceneView.pointOfView!.position) == false {
-                // If move function returned false, assume a crash and remove alien from world.
-                for particle in alien.node.childNodes{
-                    particle.removeFromParentNode()
-                }
-                alien.node.physicsBody = nil
-                alien.node.removeFromParentNode()
-                aliens.remove(at: i)
-                game.health -= alien.alien.health
+            // Move demon closer to where they need to go
+            if demon.move(towardsPosition: sceneView.pointOfView!.position) == false {
+                // If move function returned false, assume a crash and remove demon from world.
+               // for particle in demon.node.childNodes{
+                //    DispatchQueue.main.async(execute: {
+               //         particle.removeFromParentNode()
+               //     })
+              //  }
+                demon.node.physicsBody = nil
+                DispatchQueue.main.async(execute: {
+                    demon.node.removeFromParentNode()
+                })
+                demons.remove(at: i)
+                game.health -= demon.demon.health
                 if game.current_level == 1 {
-                    let newAlien = Alien(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
-                    spawnAlien(alien: newAlien)
+                    let newDemon = Demon(health: 1, power: 1, shotFreq: 60, shotProbHigh: 10, shotProbLow: 2, type: .small)
+                    spawnDemon(demon: newDemon)
                 }
                 else if game.current_level == 2 {
-                     let newAlien = Alien(health: 3, power: 3, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .medium)
-                    spawnAlien(alien: newAlien)
+                     let newDemon = Demon(health: 3, power: 3, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .medium)
+                    spawnDemon(demon: newDemon)
+                }
+                else if game.current_level == 3 {
+                    let newDemon = Demon(health: 5, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .large)
+                    spawnDemon(demon: newDemon)
                 }
                 else {
-                     let newAlien = Alien(health: 5, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .large)
-                    spawnAlien(alien: newAlien)
+                     let newDemon = Demon(health: 15, power: 5, shotFreq: 55, shotProbHigh: 10, shotProbLow: 2, type: .boss)
+                    spawnDemon(demon: newDemon)
                 }
             }else {
             
-                if alien.alien.shouldShoot() {
-                    fireLaser(fromNode: alien.node, type: .enemy)
+                if demon.demon.shouldShoot() {
+                    fireLaser(fromNode: demon.node, type: .enemy)
                 }
             }
         }
         
-        // Draw aliens on the radar as an XZ Plane
+        // Draw demons on the radar as an XZ Plane
         for (i, blip) in radarNode.children.enumerated() {
-            if i < aliens.count {
-                let alien = aliens[i]
+            if i < demons.count {
+                let demon = demons[i]
                 blip.alpha = 1
-                let relativePosition = sceneView.pointOfView!.convertPosition(alien.node.position, from: nil)
+                let relativePosition = sceneView.pointOfView!.convertPosition(demon.node.position, from: nil)
                 var x = relativePosition.x * 10
                 var y = relativePosition.z * -10
                 if x >= 0 { x = min(x, 35) } else { x = max(x, -35)}
                 if y >= 0 { y = min(y, 35) } else { y = max(y, -35)}
                 blip.position = CGPoint(x: CGFloat(x), y: CGFloat(y))
             }else{
-                // If there are less aliens than the max amount, hide the extra blips.
+                // If there are less demons than the max amount, hide the extra blips.
                 // Note: SceneKit seemed to have a problem with dynmically adding and
                 // removing blips so I removed that feature and stuck with a static maximum.
                 blip.alpha = 0
@@ -410,8 +463,12 @@ extension GameViewController : ARSCNViewDelegate{
                     particle.removeFromParentNode()
                 }
                 laser.node.physicsBody = nil
-                laser.node.removeFromParentNode()
-                lasers.remove(at: i)
+                DispatchQueue.main.async(execute: {
+                    laser.node.removeFromParentNode()
+                })
+                self.lasers.remove(at: i)
+                //laser.node.removeFromParentNode()
+                //lasers.remove(at: i)
             }else{
                 // Check for a hit against the player
                 if laser.node.physicsBody?.contactTestBitMask == PhysicsMask.enemyBullet
@@ -420,11 +477,16 @@ extension GameViewController : ARSCNViewDelegate{
                         particle.removeFromParentNode()
                     }
                     laser.node.physicsBody = nil
-                    if (laser.node == nil ) {print ("laser node")}
-                    if (laser == nil ) {print (" laser")}
-                    if (laser.node.parent == nil ) {print ("parent node")}
-                    laser.node.removeFromParentNode()
-                    lasers.remove(at: i)
+                    DispatchQueue.main.async(execute: {
+                        laser.node.removeFromParentNode()
+                    })
+                    self.lasers.remove(at: i)
+              //      laser.node.physicsBody = nil
+             //       if (laser.node == nil ) {print ("laser node")}
+              //      if (laser == nil ) {print (" laser")}
+              //      if (laser.node.parent == nil ) {print ("parent node")}
+               //     laser.node.removeFromParentNode()
+               //     lasers.remove(at: i)
                     if game.current_level == 1{
                         game.health -= 1
                     }
@@ -432,6 +494,9 @@ extension GameViewController : ARSCNViewDelegate{
                         game.health -= 3
                     }
                     if game.current_level == 3{
+                        game.health -= 5
+                    }
+                    if game.current_level == 4{
                         game.health -= 5
                     }
                 }
