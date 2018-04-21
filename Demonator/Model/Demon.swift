@@ -26,6 +26,7 @@ enum DemonType {
 
 class Demon {
     
+    let type : DemonType
     var health : Int
     let power : Int
     let scoreReward : Int
@@ -40,6 +41,7 @@ class Demon {
     var closeQuarters = false // Whether it is in the goldilocks zone
     let frontImage : UIImage
     let backImage : UIImage
+    let size = CGSize(width: 1114, height: 1350)
     
     init(health: Int, power: Int, shotFreq: Int, shotProbHigh: Int, shotProbLow: Int, type: DemonType){
         
@@ -49,11 +51,11 @@ class Demon {
         self.shotFreq = shotFreq
         self.shotProbLow = shotProbLow
         self.shotProbHigh = shotProbHigh
+        self.type = type
         
         let images = type.getImages()
         self.frontImage = images.front
         self.backImage = images.back
-        
     }
     
     func shouldShoot() -> Bool { // runs 60 fps

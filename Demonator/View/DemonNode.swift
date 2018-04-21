@@ -55,9 +55,14 @@ class DemonNode : SCNNodeContainer{
     private func createNode() -> SCNNode{
         // Set the general scale for the demon image. 
         // In the future we should really change the images
-        let scaleFactor = demon.frontImage.size.width/0.2
+        var scaleFactor = demon.frontImage.size.width/0.2
+        if demon.type == DemonType.boss {
+            scaleFactor = demon.frontImage.size.width/0.8
+        }
         let width = demon.frontImage.size.width/scaleFactor
         let height = demon.frontImage.size.height/scaleFactor
+        
+        
         
         // Creates a Plane Geometry object to represent the front of the demon
         let geometryFront = SCNPlane(width: width, height: height)

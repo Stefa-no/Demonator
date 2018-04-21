@@ -35,34 +35,15 @@ class LaserNode: SCNNodeContainer{
         
         // The sphereNode has a static physics body so we can control it's position ourselves instad of using forces
         sphereNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
-        sphereNode.physicsBody?.contactTestBitMask = type == .player ? PhysicsMask.playerBullet : PhysicsMask.enemyBullet
+        sphereNode.physicsBody!.contactTestBitMask = type == .player ? PhysicsMask.playerBullet : PhysicsMask.enemyBullet
         if type == .enemy{
-            let particleNode = SCNNode()
             let particleSystem = SCNParticleSystem(named: "fire", inDirectory: "")
-            particleSystem?.particleDiesOnCollision = true
-            particleNode.addParticleSystem(particleSystem!)
-           
-            let formatter = DateFormatter()
-            // initially set the format based on your datepicker date
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let myString = formatter.string(from: Date())
-            
-            particleNode.name = myString
-            sphereNode.addChildNode(particleNode)
-            
+            particleSystem!.particleDiesOnCollision = true
+            sphereNode.addParticleSystem(particleSystem!)
         }else{
-            let particleNode = SCNNode()
             let particleSystem = SCNParticleSystem(named: "bokeh", inDirectory: "")
-            particleSystem?.particleDiesOnCollision = true
-            
-            let formatter = DateFormatter()
-            // initially set the format based on your datepicker date
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let myString = formatter.string(from: Date())
-            particleNode.name = myString
-            
-            particleNode.addParticleSystem(particleSystem!)
-            sphereNode.addChildNode(particleNode)
+            particleSystem!.particleDiesOnCollision = true
+            sphereNode.addParticleSystem(particleSystem!)
         }
         let formatter = DateFormatter()
         // initially set the format based on your datepicker date
@@ -70,7 +51,7 @@ class LaserNode: SCNNodeContainer{
         let myString = formatter.string(from: Date())
         sphereNode.name = myString
         
-        sphereNode.physicsBody?.isAffectedByGravity = false
+        sphereNode.physicsBody!.isAffectedByGravity = false
        
         return sphereNode
     }
